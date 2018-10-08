@@ -6,7 +6,7 @@
 
 {% for post in blog %}
 <div class="container">
-<h3 class="post-title">{{post.title}}</h3>
+<h2 class="post-title"><a href="/blog?id={{post.id}}">{{post.title}}</a></h2>
 <p class="post-body">{{post.body}}</p>
 <hr>
 </div>

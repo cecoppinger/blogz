@@ -1,0 +1,20 @@
+body {
+  padding: 20px;
+}
+
+h1 {
+  margin: 50px;
+  text-align: center;
+}
+
+.error {
+  color: red;
+}
+
+label {
+  display: block;
+}
+
+.container {
+  margin: 50px 0;
+}

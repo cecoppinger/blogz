@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, render_template, session, flash
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__, static_folder='css')
+app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:num1811418@localhost:8889/build-a-blog'
 app.config['SQLALCHEMY_ECHO'] = True
@@ -26,6 +26,12 @@ def index():
 @app.route('/blog')
 def blog():
   blog = get_blog()
+  id = request.args.get('id')
+
+  if id:
+    post = Blog.query.get(id)
+    return render_template('post.html', post=post)
+
   return render_template('blog.html', blog=blog)
 
 @app.route('/newpost', methods=['POST', 'GET'])
@@ -44,7 +50,7 @@ def newpost():
     db.session.add(new_post)
     db.session.commit()
 
-    return redirect('/blog')
+    return render_template('post.html', post=new_post)
 
   return render_template('newpost.html')
 

@@ -4,12 +4,12 @@
 <h1>New Blog Post</h1>
 
 <form method="POST">
-  <label>Give your post a title
+  <label for="text">Give your post a title</label>
     <input type="text" name="title" />
-  </label><p class="error"><em>{{error}}</em></p>
-  <label>Now write some stuff
-    <textarea name="body"></textarea>
-  </label><p class="error"><em>{{error}}</em></p>
+  <p class="error"><em>{{error}}</em></p>
+  <label for="body">Now write some stuff</label>
+    <textarea name="body" rows=15 cols=45></textarea>
+  <p class="error"><em>{{error}}</em></p>
   <input type="submit" value="Post!">
 </form>
 {% endblock  %}
