@@ -3,13 +3,15 @@
 {% block content %}
 <h1>New Blog Post</h1>
 
-<form method="POST">
-  <label for="text">Give your post a title</label>
-    <input type="text" name="title" />
-  <p class="error"><em>{{error}}</em></p>
-  <label for="body">Now write some stuff</label>
-    <textarea name="body" rows=15 cols=45></textarea>
-  <p class="error"><em>{{error}}</em></p>
-  <input type="submit" value="Post!">
-</form>
+<div class="container">
+  <form method="POST">
+    <label for="text">Give your post a title</label>
+      <input type="text" name="title" />
+    <p class="error"><em>{{error}}</em></p>
+    <label for="body">Now write some stuff</label>
+      <textarea name="body" rows=15 cols=45></textarea>
+    <p class="error"><em>{{error}}</em></p>
+    <input type="submit" value="Post!">
+  </form>
+</div>
 {% endblock  %}
