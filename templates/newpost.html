@@ -6,11 +6,11 @@
 <div class="container">
   <form method="POST">
     <label for="text">Give your post a title</label>
-      <input type="text" name="title" />
-    <p class="error"><em>{{error}}</em></p>
+      <input type="text" name="title" value="{{title}}"/>
+    <p class="error">{% if title|length == 0 %}<em>{{error}}</em>{% endif %}</p>
     <label for="body">Now write some stuff</label>
-      <textarea name="body" rows=15 cols=45></textarea>
-    <p class="error"><em>{{error}}</em></p>
+      <textarea name="body" rows=15 cols=45>{{body}}</textarea>
+    <p class="error">{% if body|length == 0 %}<em>{{error}}</em>{% endif %}</p>
     <input type="submit" value="Post!">
   </form>
 </div>

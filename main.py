@@ -4,7 +4,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:num1811418@localhost:8889/build-a-blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:password@localhost:8889/build-a-blog'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
@@ -41,15 +41,13 @@ def blog():
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():
-  #error_msg = ''
-
   if request.method == 'POST':
     post_title = request.form['title']
     post_body = request.form['body']
 
     if not post_title or not post_body:
       error_msg = 'Must not be empty'
-      return render_template('newpost.html', error=error_msg)
+      return render_template('newpost.html', error=error_msg, title=post_title, body=post_body)
     
     new_post = Blog(post_title, post_body)
     db.session.add(new_post)
