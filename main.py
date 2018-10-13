@@ -16,7 +16,7 @@ class Blog(db.Model):
   pub_date = db.Column(db.DateTime)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-  def __init__(self, title, body, user, spub_date=None):
+  def __init__(self, title, body, user, pub_date=None):
     self.title = title
     self.body = body
     if pub_date == None:
@@ -41,7 +41,7 @@ def get_blog():
 def require_login():
   allowed_routes = ['login', 'register', 'blog']
   if 'user' not in session and request.endpoint not in allowed_routes:
-    flash("Must be logged in to do that")
+    flash("Must be logged in to do that", 'error')
     return redirect('/login')
 
 @app.route('/')
@@ -68,8 +68,11 @@ def newpost():
     if not post_title or not post_body:
       error_msg = 'Must not be empty'
       return render_template('newpost.html', error=error_msg, title=post_title, body=post_body)
+
+    username = session['user']
+    user = User.query.filter_by(username=username).first()
     
-    new_post = Blog(post_title, post_body)
+    new_post = Blog(post_title, post_body, user)
     db.session.add(new_post)
     db.session.commit()
 
