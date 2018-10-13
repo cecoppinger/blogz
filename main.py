@@ -4,29 +4,42 @@ from datetime import datetime
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:password@localhost:8889/build-a-blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:password@localhost:8889/blogz'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
+app.secret_key = 'aoweifjsladkfjawoiefr123j12klj'
 
 class Blog(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   title = db.Column(db.String(120))
   body = db.Column(db.Text)
   pub_date = db.Column(db.DateTime)
+  user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-  def __init__(self, title, body, pub_date=None):
+  def __init__(self, title, body, user, spub_date=None):
     self.title = title
     self.body = body
     if pub_date == None:
       pub_date = datetime.utcnow()
     self.pub_date = pub_date
+    self.user = user
+
+class User(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  username = db.Column(db.String(120), nullable=False)
+  password = db.Column(db.String(120), nullable=False)
+  blogs = db.relationship('Blog', backref='user', lazy=True)
+
+  def __init__(self, username, password):
+    self.username = username
+    self.password = password
 
 def get_blog():
   return Blog.query.order_by(Blog.pub_date.desc())
 
 @app.route('/')
 def index():
-  return redirect('/blog')
+  return redirect('/login')
 
 @app.route('/blog')
 def blog():
@@ -56,6 +69,33 @@ def newpost():
     return render_template('post.html', post=new_post)
 
   return render_template('newpost.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+  if request.method == 'POST':
+    username = request.form['username']
+    password = request.form['password']
+    user = User.query.filter_by(username=username).first()
+
+    if user and user.password == password:
+      session['user'] = username
+      return redirect('/newpost')
+    elif not username or not password:
+      flash("All fields must be filled out", 'error')
+      return render_template('login.html')
+    elif username and not user:
+      flash("That username does not exist", 'error')
+      return render_template('login.html')
+    else:
+      flash("Incorrect password", 'error')
+      return render_template('login.html')
+
+  return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():  
+
+  return render_template('register.html')
 
 if __name__ == '__main__':
   app.run()
