@@ -94,6 +94,31 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():  
+  if request.method == 'POST':
+    username = request.form['username']
+    password = request.form['password']
+    verify = request.form['verify-pw']
+    existing_user = User.query.filter_by(username=username).first()
+
+    if not username or not password or not verify:
+      flash('All fields must be filled out', 'error')
+      return render_template('register.html')
+    elif existing_user:
+      flash('That username is taken', 'error')
+      return render_template('register.html')
+    elif password != verify:
+      flash("Those passwords don't match", 'error')
+      return render_template('register.html')
+    elif len(username) < 3 or len(password) < 3:
+      flash("Username and password must be at least 3 characters")
+      return render_template('register.html')
+    elif not existing_user and password == verify:
+      flash("Successfully registered")
+      session['user'] = username
+      return redirect('/newpost')
+    else:
+      flash("Seems I haven't handled this yet!")
+      return render_template('register.html')
 
   return render_template('register.html')
 
