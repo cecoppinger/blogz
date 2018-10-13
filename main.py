@@ -37,6 +37,13 @@ class User(db.Model):
 def get_blog():
   return Blog.query.order_by(Blog.pub_date.desc())
 
+@app.before_request
+def require_login():
+  allowed_routes = ['login', 'register', 'blog']
+  if 'user' not in session and request.endpoint not in allowed_routes:
+    flash("Must be logged in to do that")
+    return redirect('/login')
+
 @app.route('/')
 def index():
   return redirect('/login')
