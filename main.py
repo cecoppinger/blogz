@@ -102,17 +102,20 @@ def register():
 
     if not username or not password or not verify:
       flash('All fields must be filled out', 'error')
-      return render_template('register.html')
+      return render_template('register.html', username=username)
     elif existing_user:
       flash('That username is taken', 'error')
       return render_template('register.html')
     elif password != verify:
       flash("Those passwords don't match", 'error')
-      return render_template('register.html')
+      return render_template('register.html', username=username)
     elif len(username) < 3 or len(password) < 3:
       flash("Username and password must be at least 3 characters")
       return render_template('register.html')
     elif not existing_user and password == verify:
+      user = User(username, password)
+      db.session.add(user)
+      db.session.commit()
       flash("Successfully registered")
       session['user'] = username
       return redirect('/newpost')
@@ -121,6 +124,11 @@ def register():
       return render_template('register.html')
 
   return render_template('register.html')
+
+@app.route('/logout')
+def logout():
+  del session['user']
+  return redirect('/blog')
 
 if __name__ == '__main__':
   app.run()
