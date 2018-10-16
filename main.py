@@ -46,16 +46,21 @@ def require_login():
 
 @app.route('/')
 def index():
-  return redirect('/login')
+  users = User.query.all()
+  return render_template('index.html', users=users)
 
 @app.route('/blog')
 def blog():
   blog = get_blog()
   id = request.args.get('id')
+  username = request.args.get('username')
 
   if id:
     post = Blog.query.get(id)
     return render_template('post.html', post=post)
+  elif username:
+    posts = Blog.query.filtery_by(username=username).all()
+    return render_template('blog.html', blog=posts)
 
   return render_template('blog.html', blog=blog)
 
