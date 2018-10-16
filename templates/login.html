@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Login to Blogz</h1>
-<h3>Dont have an account yet? <a href="/register">Register here!</a></h3>
-<div class="form">
-<form method='POST'>
-  <label><span>Username</span>
-    <input type="username" name="username" value="{{username}}" /><p class='error'>{{username_error}}</p>
-  </label>
-  <label><span>Password</span>
-    <input type="password" name="password"/><p class='error'>{{password_error}}</p>
-  </label>
-  <input type="submit" value="Login"/>
-</form>
+<div class="container">
+  <h1>Login to Blogz</h1>
+  <h3>Dont have an account yet? <a href="/register">Register here!</a></h3>
+  <div class="form">
+    <form method='POST'>
+      <label for="name"><span>Username</span></label>
+        <input type="text" name="username" id="name" value="{{username}}" /><p class='error'>{{username_error}}</p>
+      <label for="pw"><span>Password</span></label>
+        <input type="password" id="pw" name="password"/><p class='error'>{{password_error}}</p>
+      <input type="submit" value="Login"/>
+    </form>
+  </div>
 </div>
+
 {% endblock %}

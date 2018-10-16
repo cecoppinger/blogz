@@ -38,14 +38,15 @@ p {
 
 .container {
   padding: 25px;
-  margin: 25px 0;
-  background-color: #eee;
+  background-color: #974a72;
   border-radius: 10px;
+  width: 500px;
+  height: 350px;
 }
 
 .nav {
   padding: 15px;
-  background-color: #ccc;
+  background-color: #4a4b97;
   position: sticky;
   top: 0;
   border-radius: 5px;

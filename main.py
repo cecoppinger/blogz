@@ -28,7 +28,7 @@ class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   username = db.Column(db.String(120), nullable=False)
   password = db.Column(db.String(120), nullable=False)
-  blogs = db.relationship('Blog', backref='user', lazy=True)
+  posts = db.relationship('Blog', backref='user', lazy=True)
 
   def __init__(self, username, password):
     self.username = username
@@ -39,7 +39,7 @@ def get_blog():
 
 @app.before_request
 def require_login():
-  allowed_routes = ['login', 'register', 'blog']
+  allowed_routes = ['login', 'register', 'blog', 'index']
   if 'user' not in session and request.endpoint not in allowed_routes:
     flash("Must be logged in to do that", 'error')
     return redirect('/login')
@@ -59,7 +59,8 @@ def blog():
     post = Blog.query.get(id)
     return render_template('post.html', post=post)
   elif username:
-    posts = Blog.query.filtery_by(username=username).all()
+    user = User.query.filter_by(username=username).first()
+    posts = user.posts
     return render_template('blog.html', blog=posts)
 
   return render_template('blog.html', blog=blog)
