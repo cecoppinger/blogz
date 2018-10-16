@@ -1,14 +1,15 @@
 body {
   padding: 20px;
+  background: #97704a;
 }
 
-h1 {
-  margin: 50px;
+.header {
+  padding: 35px;
   text-align: center;
 }
 
-label {
-  display: block;
+div.form {
+  font-size: 1.5em;
 }
 
 div.form label {

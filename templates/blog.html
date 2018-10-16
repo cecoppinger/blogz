@@ -1,14 +1,27 @@
 {% extends "base.html" %}
 
+{% block header %}
+<div class="header">
+  <h1>Blogz</h1>
+</div>
+{% endblock %}
+
 {% block content %}
 
-<h1>Build a Blog</h1>
-
-{% for post in blog %}
-<div class="container">
-<h2 class="post-title"><a href="/blog?id={{post.id}}">{{post.title}}</a></h2>
-<p class="post-body">{{post.body}}</p>
-</div>
-{% endfor %}
+{% if blog %}
+  {% for post in blog %}
+  <div class="container">
+    <div class="post">
+      <h2 class="post-title"><a href="/blog?id={{post.id}}">{{post.title}}</a></h2>
+      <p class="post-body">{{post.body}}</p>
+      <p class="post-author">{{post.user.username}}</p>
+    </div>
+  </div>
+  {% endfor %}
+{% else %}
+  <div class="container">
+    There's nothing here...
+  </div>
+{% endif %}
 
 {% endblock %}
