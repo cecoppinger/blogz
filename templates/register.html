@@ -3,18 +3,15 @@
 {% block content %}
 <h1>Register to start posting!</h1>
 
-<div class="form">
-<form method='POST'>
-  <label><span>Username</span>
-    <input type="username" name="username" value="{{username}}" />
-  </label>
-  <label><span>Password</span>
-    <input type="password" name="password"/>
-  </label>
-  <label><span>Verify Password</span>
-    <input type="password" name="verify-pw" />
-  </label>
-  <input type="submit" value="Register"/>
-</form>
+<div class="container">
+  <form method='POST'>
+    <label for="name"><span>Username</span></label>
+      <input type="text" id="name" name="username" value="{{username}}" />
+    <label for="pw"><span>Password</span></label>
+      <input type="password" id="pw" name="password"/>
+    <label for="verify"><span>Verify Password</span></label>
+      <input type="password" id="verify" name="verify-pw" />
+    <input type="submit" value="Register"/>
+  </form>
 </div>
 {% endblock %}

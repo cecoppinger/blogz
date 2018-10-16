@@ -8,25 +8,6 @@ body {
   text-align: center;
 }
 
-div.form {
-  font-size: 1.5em;
-}
-
-div.form label {
-  display: block;
-  position: relative;
-}
-
-div.form label span {
-  font-weight: bold;
-  position: absolute;
-  left: 3px;
-}
-
-div.form label input {
-  margin-left: 120px;
-}
-
 .error {
   color: red;
 }
@@ -42,6 +23,7 @@ p {
   border-radius: 10px;
   width: 500px;
   height: 350px;
+  margin: auto;
 }
 
 .nav {
