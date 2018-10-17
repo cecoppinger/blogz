@@ -9,15 +9,18 @@
 {% block content %}
 
 {% if blog %}
+<div class="container">
   {% for post in blog %}
-  <div class="container">
-    <div class="post">
-      <h2 class="post-title"><a href="/blog?id={{post.id}}">{{post.title}}</a></h2>
-      <p class="post-body">{{post.body}}</p>
-      <p class="post-author"><a href="/blog?username={{post.user.username}}">{{post.user.username}}</a></p>
-    </div>
+  
+  <div class="post">
+      <h2><a href="/blog?id={{post.id}}">{{post.title}}</a></h2>
+      <p class="small italic">Written by<a href="/blog?username={{post.user.username}}">{{post.user.username}}</a></p>
+      <hr>
+      <p>{{post.body}}</p>
   </div>
+ 
   {% endfor %}
+</div>
 {% else %}
   <div class="container">
     There's nothing here...

@@ -6,11 +6,15 @@
 </head>
 <body>
   <div class="nav">
-    <a href="/blog">Main Blog Page</a>
-    <a href="/newpost">Add a Blog Entry</a>
-    <a href="/logout">Logout</a>
-    <a href="/login">Login</a>
-    <a href="/">Home</a>
+    <div class="left">
+      <a href="/blog">Main Blog Page</a>
+      <a href="/newpost">Add a Blog Entry</a>
+      <a href="/">Home</a>
+    </div>
+    <div class="right">
+      <a href="/logout">Logout</a>
+      <a href="/login">Login</a>
+    </div>
   </div>
 
   {% block header %}
