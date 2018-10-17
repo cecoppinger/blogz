@@ -1,6 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding: 20px;
-  background: #97704a;
+  background: #d1e3f2;
 }
 
 .header {
@@ -20,10 +24,35 @@ p {
 .container {
   padding: 25px;
   background-color: #974a72;
-  border-radius: 10px;
-  width: 500px;
-  height: 350px;
-  margin: auto;
+  border-radius: 5px;
+  width: 960px;
+  height: 450px;
+  margin: 15px auto;
+  border: 1px solid;
+  box-shadow: 0 3px 10px 3px #888888;
+}
+
+form {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+input[type=text], input[type=password], textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: none;
+}
+
+textarea {
+  height: 200px;
+}
+
+input[type=submit] {
+  background-color: #704a97;
+  padding: 12px 20px;
+  border: none;
 }
 
 .nav {
