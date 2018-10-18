@@ -75,8 +75,8 @@ def newpost():
     post_body = request.form['body']
 
     if not post_title or not post_body:
-      error_msg = 'Must not be empty'
-      return render_template('newpost.html', error=error_msg, title=post_title, body=post_body)
+      flash("All fields must be filled out")
+      return render_template('newpost.html', title=post_title, body=post_body)
 
     username = session['user']
     user = User.query.filter_by(username=username).first()
