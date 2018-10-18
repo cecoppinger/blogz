@@ -7,11 +7,13 @@
 {% endblock %}
 
 {% block content %}
-<div class="column">
+
+<div class="post index center">
   <ul>
-  {% for user in users %}
-    <li><a href="/blog?username={{user.username}}">{{user.username}}</a></li>
-  {% endfor %}
+    {% for user in users %}
+      <li style="font-size: 1.25em;"><a href="/blog?username={{user.username}}">{{user.username}}</a></li>
+    {% endfor %}
   </ul>
 </div>
+
 {% endblock %}

@@ -37,6 +37,9 @@ class User(db.Model):
 def get_blog():
   return Blog.query.order_by(Blog.pub_date.desc())
 
+def get_users():
+  return User.query.all()
+
 @app.before_request
 def require_login():
   allowed_routes = ['login', 'register', 'blog', 'index']
@@ -61,9 +64,9 @@ def blog():
   elif username:
     user = User.query.filter_by(username=username).first()
     posts = user.posts
-    return render_template('blog.html', blog=posts)
+    return render_template('blog.html', blog=posts, users=get_users())
 
-  return render_template('blog.html', blog=blog)
+  return render_template('blog.html', blog=blog, users=get_users())
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():

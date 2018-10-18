@@ -2,29 +2,39 @@
 
 {% block header %}
 <div class="header">
-  <h1>Blogz</h1>
+  <h1>&lt;/Blogz&gt;</h1>
 </div>
 {% endblock %}
 
 {% block content %}
-
 {% if blog %}
-<div class="container">
-  {% for post in blog %}
-  
-  <div class="post">
-      <h2><a href="/blog?id={{post.id}}">{{post.title}}</a></h2>
-      <p class="small italic">Written by: <a href="/blog?username={{post.user.username}}">{{post.user.username}}</a></p>
-      <hr>
-      <p>{{post.body}}</p>
+<div class="row">
+  <div class="left-col">
+    {% for post in blog %}
+      <div class="post">
+        <a class="post-link" href="/blog?id={{post.id}}"></a>
+        <h2>{{post.title}}</h2>
+        <p class="small italic post-author">Written by: <a href="/blog?username={{post.user.username}}">{{post.user.username}}</a></p>
+        <hr>
+        <p>{{post.body}}</p>
+      </div>
+    {% endfor %}
   </div>
- 
-  {% endfor %}
-</div>
 {% else %}
-  <div class="container">
+  <div class="left-col post">
     There's nothing here...
   </div>
 {% endif %}
+  <div class="right-col">
+    <div class="post">
+      <h2 style="margin-left: 50px;">Users!</h2>
+      <ul>
+        {% for user in users %}
+          <li><a href="/blog?username={{user.username}}">{{user.username}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
