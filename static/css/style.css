@@ -46,7 +46,7 @@ form {
 
 input[type=text], input[type=password], textarea {
   width: 100%;
-  padding: 12px;
+  padding: 6px;
   margin-top: 6px;
   margin-bottom: 16px;
   resize: none;
