@@ -81,13 +81,8 @@ def newpost():
     post_body = request.form['body']
 
     if not post_title or not post_body:
-<<<<<<< Updated upstream
       flash("All fields must be filled out")
       return render_template('newpost.html', title=post_title, body=post_body)
-=======
-      error_msg = 'Must not be empty'
-      return render_template('newpost.html', error=error_msg, title=post_title, body=post_body, logged_in=is_in_session())
->>>>>>> Stashed changes
 
     username = session['user']
     user = User.query.filter_by(username=username).first()
