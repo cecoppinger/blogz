@@ -69,7 +69,7 @@ def blog():
     return render_template('post.html', post=post)
   elif username:
     user = User.query.filter_by(username=username).first()
-    posts = user.posts
+    posts = Blog.query.filter_by(user_id=user.id).order_by(Blog.pub_date.desc())
     return render_template('blog.html', blog=posts, users=get_users(), logged_in=is_in_session())
 
   return render_template('blog.html', blog=blog, users=get_users(), logged_in=is_in_session())
