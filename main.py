@@ -40,6 +40,12 @@ def get_blog():
 def get_users():
   return User.query.all()
 
+def is_in_session():
+  if 'user' in session:
+    return True
+  else:
+    return False
+
 @app.before_request
 def require_login():
   allowed_routes = ['login', 'register', 'blog', 'index']
@@ -50,7 +56,7 @@ def require_login():
 @app.route('/')
 def index():
   users = User.query.all()
-  return render_template('index.html', users=users)
+  return render_template('index.html', users=users, logged_in=is_in_session())
 
 @app.route('/blog')
 def blog():
@@ -64,9 +70,9 @@ def blog():
   elif username:
     user = User.query.filter_by(username=username).first()
     posts = user.posts
-    return render_template('blog.html', blog=posts, users=get_users())
+    return render_template('blog.html', blog=posts, users=get_users(), logged_in=is_in_session())
 
-  return render_template('blog.html', blog=blog, users=get_users())
+  return render_template('blog.html', blog=blog, users=get_users(), logged_in=is_in_session())
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():
@@ -75,8 +81,13 @@ def newpost():
     post_body = request.form['body']
 
     if not post_title or not post_body:
+<<<<<<< Updated upstream
       flash("All fields must be filled out")
       return render_template('newpost.html', title=post_title, body=post_body)
+=======
+      error_msg = 'Must not be empty'
+      return render_template('newpost.html', error=error_msg, title=post_title, body=post_body, logged_in=is_in_session())
+>>>>>>> Stashed changes
 
     username = session['user']
     user = User.query.filter_by(username=username).first()
@@ -85,9 +96,9 @@ def newpost():
     db.session.add(new_post)
     db.session.commit()
 
-    return render_template('post.html', post=new_post)
+    return render_template('post.html', post=new_post, logged_in=is_in_session())
 
-  return render_template('newpost.html')
+  return render_template('newpost.html', logged_in=is_in_session())
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

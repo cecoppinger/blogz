@@ -2,11 +2,17 @@
 
 {% block content %}
 
-<div class="post">
-  <h3 class="post-title">{{post.title}}</h3>
-  <p class="small italic">Written by: <a href="/blog?username={{post.user.username}}">{{post.user.username}}</a></p>
-  <hr>
-  <p>{{post.body}}</p>
-</div>
+{% if post %}
+  <div class="post">
+    <h3 class="post-title">{{post.title}}</h3>
+    <p class="small italic">Written by: <a href="/blog?username={{post.user.username}}">{{post.user.username}}</a></p>
+    <hr>
+    <p>{{post.body}}</p>
+  </div>
+{% else %}
+  <div class="post">
+    There doesn't seem to be anything here...
+  </div>
+{% endif %}
 
 {% endblock %}

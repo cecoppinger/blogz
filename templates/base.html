@@ -13,8 +13,11 @@
         <a href="/">Home</a>
       </div>
       <div class="right">
-        <a href="/logout">Logout</a>
-        <a href="/login">Login</a>
+        {% if not logged_in %}
+          <a href="/login">Login</a>
+        {% else %}
+          <a href="/logout">Logout</a>
+        {% endif %}
       </div>
     </div>
   </div>
