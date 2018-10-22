@@ -1,5 +1,6 @@
 from app import db
 from hashutils import make_pw_hash
+from datetime import datetime
 
 class Blog(db.Model):
   id = db.Column(db.Integer, primary_key=True)
